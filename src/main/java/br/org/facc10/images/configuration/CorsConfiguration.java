@@ -12,7 +12,7 @@ public class CorsConfiguration implements WebMvcConfigurer {
     public void addCorsMappings(CorsRegistry registry) {
         // Aplica CORS apenas para os endpoints da API
         registry.addMapping("/api/**") // Apenas rotas que começam com "/api"
-                .allowedOrigins("http://127.0.0.1:5500") // Frontend (ajuste se necessário)
+                .allowedOrigins("http://127.0.0.1:5500", "http://localhost:4200") // Frontend (ajuste se necessário)
                 .allowedMethods("GET", "POST", "PUT", "DELETE") // Métodos permitidos
                 .allowedHeaders("*") // Permite todos os cabeçalhos
                 .allowCredentials(true); // Permite credenciais (cookies, etc.)

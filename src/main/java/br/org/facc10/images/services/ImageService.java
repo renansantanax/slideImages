@@ -2,6 +2,8 @@ package br.org.facc10.images.services;
 import br.org.facc10.images.entities.Image;
 import br.org.facc10.images.repositories.ImageRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -23,6 +25,9 @@ public class ImageService {
     public Image uploadImage(MultipartFile file) throws IOException {
         String filename = file.getOriginalFilename();
         Path path = Paths.get(UPLOAD_DIR + filename);
+        if(Files.exists(path)) {
+            throw new IllegalArgumentException("Já existe uma imagem com esse nome, tente outro.");
+        }
         String normalizedFilePath = path.toString().replace("\\", "/");
         Files.write(path, file.getBytes());
 
